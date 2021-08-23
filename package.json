@@ -1,8 +1,9 @@
 {
   "name": "watch-point",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "",
   "main": "./dist/watchPoint.js",
+  "module": "/dist/watchPoint.js",
   "scripts": {
     "build":"webpack "
   },

@@ -14,6 +14,8 @@ export default class WatchPoistCycle {
       ) {
         this.onPageShow();
         this.onPageHide();
+        window.history.pushState = this.proxyHistoryState("pushState", this.onPageShowLogic.bind(this));
+        window.history.replaceState =  this.proxyHistoryState("replaceState", this.onPageShowLogic.bind(this));
       }
       if (
         typeof document !== "undefined" &&
@@ -23,6 +25,16 @@ export default class WatchPoistCycle {
       }
     } catch (error) {
       console.log("error:", error);
+    }
+  }
+
+  // 代理
+  proxyHistoryState(name, pageShowLogic) {
+    const ori = window.history[name];
+    return function(){
+      const res = ori.apply(this,arguments)
+      pageShowLogic(new Event(`history${name}`))
+      return res
     }
   }
 
@@ -61,16 +73,16 @@ export default class WatchPoistCycle {
   onPageShow() {
     const eventhandle = (event) => {
       this.onPageShowLogic(event);
-    }
-    window.removeEventListener("pageshow", eventhandle)
+    };
+    window.removeEventListener("pageshow", eventhandle);
     window.addEventListener("pageshow", eventhandle);
   }
   // window事件监听页面变化  onload 事件触发后初始化页面时触发
   onPageHide() {
     const eventHandle = (event) => {
       this.onPageHideLogic(event);
-    }
-    window.removeEventListener("pagehide", eventHandle)
+    };
+    window.removeEventListener("pagehide", eventHandle);
     window.addEventListener("pagehide", eventHandle);
   }
 
