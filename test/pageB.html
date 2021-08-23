@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page</title>
+    <base href="./">
+    <script src="../dist/watchPoint.js"></script>
+</head>
+<body>
+    <h2>这是 pageBBB 页面</h2>
+    <script>
+        const wp = new WatchPoint('https://cn.bing.com/english/zochatv2',{
+            dataPool:{
+                a:1,
+                b:2
+            }
+        })
+        wp.useHooks({
+            pageShowHook,
+            pageHideHook,
+            shouldSend
+        })
+
+        function shouldSend(){
+            return true
+        }
+
+        function pageShowHook(event , shouldSendRes){
+            console.log('pageB --- pageShowHoos',shouldSendRes,event);
+        }
+
+        function pageHideHook(event){
+            console.log('pageB --- pageHideHoos',event);
+        }
+            
+    </script>
+</body>
+</html>

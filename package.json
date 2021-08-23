@@ -1,0 +1,21 @@
+{
+  "name": "watch-point",
+  "version": "1.0.3",
+  "description": "",
+  "main": "./dist/watchPoint.js",
+  "scripts": {
+    "build":"webpack "
+  },
+  "keywords": [
+    "watch",
+    "point",
+    "watch-point"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^16.4.13",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}
